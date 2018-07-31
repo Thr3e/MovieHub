@@ -42,8 +42,16 @@ export default {
     watch:{
         curIdx(newVal){
             this.$store.commit('changeLeft', parseFloat(newVal) * 100 / 3 + '%')
+        },
+        $route(to, from){
+            let fullPath = to.fullPath;
+            if((to.fullPath).match('/detail')) {
+                this.$store.commit('changeTbState', false)
+            }else{
+                this.$store.commit('changeTbState', true)
+            }
         }
-    },
+    }
 }
 </script>
 

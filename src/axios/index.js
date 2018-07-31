@@ -19,7 +19,4 @@ class Axios {
 }
 
 
-
-
-
-// export default 
+module.exports = Axios; 

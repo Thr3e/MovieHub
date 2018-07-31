@@ -12,7 +12,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
     },
     {
       path: '/search',
@@ -25,7 +25,7 @@ export default new Router({
       component: Mine
     },
     {
-      path: '/detail',
+      path: '/detail/:movieId',
       name: 'Detail',
       component: Detail
     }

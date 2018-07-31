@@ -1,10 +1,16 @@
 <template>
     <div id="search-bar">
-        <div class="locat-wrap">
-            <p class="location">{{locate}}</p>
-            <Icon type="ios-arrow-down"></Icon>
+        <div class="search-box" v-show="this.$store.state.isFirstLevel">
+            <div class="locat-wrap">
+                <p class="location">{{locate}}</p>
+                <Icon type="ios-arrow-down"></Icon>
+            </div>
+            <input class="search-ipt" placeholder="电影/导演/演员" style="width: 72%"/>
         </div>
-        <i-input class="search-box" icon="ios-search" placeholder="电影/导演/演员" style="width: 72%"></i-input>
+        <div class="title-box" v-show="!this.$store.state.isFirstLevel">
+            <button type="button" @click="goBack"><Icon type="ios-arrow-back"></Icon></button>
+            <h3>{{this.$store.state.title}}</h3>
+        </div>
     </div>
 </template>
 
@@ -16,6 +22,11 @@ export default {
             locate:"成都"
         }
     },
+    methods:{
+        goBack(){
+            this.$router.go(-1)
+        }
+    }
 }
 </script>
 
@@ -23,8 +34,11 @@ export default {
 
 #search-bar{
     width: 100%;
-    height: 64px;
     background: olivedrab;
+}
+
+.search-box{
+    height: 64px;
 }
 
 .locat-wrap{
@@ -38,13 +52,15 @@ export default {
     display: inline-block;
 }
 
-.search-box{
+.search-ipt{
+    display: inline-block;
     margin: 10px auto;
-}
-
-.search-box input{
     outline: 0;
     height: 22px;
-    float: left;
+    /* float: left; */
+}
+
+.title-box{
+    height: 50px;
 }
 </style>

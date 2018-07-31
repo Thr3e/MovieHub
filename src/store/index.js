@@ -5,12 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isShowTabbar:true,
-    left:0
+    isFirstLevel:true,
+    left:0,
+    title:'电影'
   },
   mutations:{
     changeTbState(state, isShow){
-        state.isShowTabbar = isShow;
+        state.isFirstLevel = isShow;
     },
     changeLeft(state, left){
         state.left = left;

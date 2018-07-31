@@ -6,7 +6,7 @@
         <router-view/>
       </transition>
     </div>
-    <TabBar v-show="this.$store.state.isShowTabbar"/>
+    <TabBar v-show="this.$store.state.isFirstLevel"/>
   </div>
 </template>
 
@@ -23,17 +23,21 @@ export default {
 </script>
 
 <style>
+#app{
+  width: 100%;
+  height: 100%;
+}
 .router{
   width: 100%;
-  height: 800px;
+  height: calc(100% - 64px);
+  overflow: scroll;
   position: relative;
   z-index: 10;
 }
 
 .content{
-  height: calc(100% - 49px - 64px);
   width: 100%;
-  padding-top: 50px;
+  padding: 10px 0 50px;
   position: absolute;
   left: 0;
   top: 0;
