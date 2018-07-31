@@ -10,3 +10,5 @@
  [iView](http://v1.iviewui.com/)
 
  [mobileSelect](https://github.com/onlyhom/mobileSelect.js)
+
+ [swiper](https://surmon-china.github.io/vue-awesome-swiper/)

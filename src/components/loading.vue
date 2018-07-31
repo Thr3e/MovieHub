@@ -19,19 +19,23 @@ export default {
 
 <style scope>
 @keyframes beat {
-    from{
+    0%{
         transform: translateY(0)
     }
-    50%{
+    25%{
         transform: translateY(-10px)
     }
-    to{
+    50%{
+        transform: translateY(0)
+    }
+    100%{
         transform: translateY(0)
     }
 }
 #loader{
     width: 50px;
     height: 30px;
+    margin: 0 auto;
 }
 
 .loading-box{
@@ -45,18 +49,18 @@ export default {
 .loading-dot{
     width: 12px;
     height: 12px;
-    background: rebeccapurple;
+    background: #112d4e;
     border-radius: 50%;
 }
 
 .active div:nth-child(1){
-    animation: beat 1s ease-in-out infinite;
+    animation: beat 1.4s ease-in-out infinite;
 }
 .active div:nth-child(2){
-    animation: beat 1s ease-in-out infinite .2s;
+    animation: beat 1.4s ease-in-out infinite .2s;
 }
 .active div:nth-child(3){
-    animation: beat 1s ease-in-out infinite .4s;
+    animation: beat 1.4s ease-in-out infinite .4s;
 }
 
 </style>

@@ -1,51 +1,64 @@
 <template>
     <div class="content">
-        <div class="movie-tag" v-for="(val, idx) in theaters" :key="idx">
-            <img :src="val['images']['small']" class="image"/>
-            <div class="movie-info">
-                <h2 class="movie-title">{{val['original_title']}}</h2>
-                <div class="star-box">
-                    <p v-if="val['rating']['average'] === 0">暂无评分</p>
-                    <div v-else>
-                        <Icon v-for="index in 5" :key="index" :type="getIconType(index, val['rating']['stars'] / 10)"></Icon>
-                        <span>{{val['rating']['average']}}</span>
+        <Tabs>
+            <TabPane label="标签一">
+                <Loader :isAnimation="isLoading"/>
+                <div class="movie-tag" v-for="(val, idx) in theaters" :key="idx">
+                    <img :src="val['images']['small']" class="image"/>
+                    <div class="movie-info">
+                        <h2 class="movie-title">{{val['original_title']}}</h2>
+                        <div class="star-box">
+                            <p v-if="val['rating']['average'] === 0">暂无评分</p>
+                            <div v-else>
+                                <Icon v-for="index in 5" :key="index" :type="getIconType(index, val['rating']['stars'] / 10)"></Icon>
+                                <span>{{val['rating']['average']}}</span>
+                            </div>
+                        </div>
+                        <p class="directors">导演:<span>{{getNameList(val['directors'])}}</span></p>
+                        <p class="casts">主演:<span>{{getNameList(val['casts'])}}</span></p>
                     </div>
+                    <div class="btn-box">
+                        <p><span>{{getCollectCount(val['collect_count'])}}</span>人看过</p>
+                        <button class="detail-btn" @click="goDetail" type="button" :data-id="val['id']">详情</button>
+                    </div> 
                 </div>
-                <p class="directors">导演:<span>{{getNameList(val['directors'])}}</span></p>
-                <p class="casts">主演:<span>{{getNameList(val['casts'])}}</span></p>
-            </div>
-            <div class="btn-box">
-                <p><span>{{getCollectCount(val['collect_count'])}}</span>人看过</p>
-                <button class="detail-btn" @click="goDetail" type="button" :data-id="val['id']">详情</button>
-            </div> 
-        </div>
+            </TabPane>
+            <TabPane label="标签二">标签二的内容</TabPane>
+        </Tabs>
+        
     </div>
 </template>
 
 <script>
+import Loader from '../components/loading'
 export default {
     name:'Home',
     data(){
         return{
-            theaters:[]
+            theaters:[],
+            isLoading:true
         }
     },
+    components:{
+        Loader
+    },
     created(){
-            this.$axios.get(this.HOST + '/movie/in_theaters', {
-                params: {
-                    apikey:'0b2bdeda43b5688921839c8ecb20399b',
-                    city:'成都',
-                    start:1,
-                    count:0
-                }
-            })
-            .then(res => {
-                console.log(res['data']['subjects'])
-                this.theaters = res['data']['subjects'];
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        this.$axios.get(this.HOST + '/movie/in_theaters', {
+            params: {
+                apikey:'0b2bdeda43b5688921839c8ecb20399b',
+                city:'成都',
+                start:1,
+                count:0
+            }
+        })
+        .then(res => {
+            console.log(res['data']['subjects'])
+            this.theaters = res['data']['subjects'];
+            this.isLoading = false;
+        })
+        .catch(error => {
+            console.log(error);
+        })
     },
     methods:{
         getNameList(arr){
@@ -94,7 +107,7 @@ export default {
     align-items: flex-start;
     /* background: orangered; */
     text-align: left;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid #ece9e9;
     padding: 10px 0;
 }
 
@@ -112,7 +125,7 @@ export default {
 }
 
 .movie-info{
-    width: 45%;
+    width: 50%;
     color: gray;
 }
 
@@ -127,46 +140,34 @@ export default {
 }
 
 .movie-info .star-box{
-    color: orange;
+    color: #de5b7b;
 }
 
 .btn-box{
     text-align: center;
-    color: red;
-    width: 33%;
+    color: #ec9e69;
+    width: 25%;
     padding-top: 20px;
 }
 
 .btn-box .detail-btn{
     display: block;
-    width: 80%;
+    width: 72%;
     margin: 5px auto;
-    color: red;
+    color: #ec9e69;
     outline: 0;
-    border: 1px solid red;
-    background: #ffffff;
+    border: 1px solid #ec9e69;
+    background: #f9f7f7;
     border-radius: 3px;
     letter-spacing: 5px;
-
 }
 
-</style>
+.btn-box .detail-btn:active{
+    color: #f9f7f7;
+    background: #ec9e69;
+}
 
-/**
-alt:"https://movie.douban.com/subject/25882296/"
-casts:(3) [{…}, {…}, {…}]
-collect_count:70299
-directors:[{…}]
-durations:["132分钟"]
-genres:(3) ["动作", "悬疑", "古装"]
-has_video:false
-id:"25882296"
-images:{small: "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2526405034.jpg", large: "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2526405034.jpg", medium: "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2526405034.jpg"}
-mainland_pubdate:"2018-07-27"
-original_title:"狄仁杰之四大天王"
-pubdates:["2018-07-27(中国大陆)"]
-rating:{max: 10, average: 6.6, details: {…}, stars: "35", min: 0}
-subtype:"movie"
-title:"狄仁杰之四大天王"
-year:"2018" 
-*/
+#loader{
+    margin: 10px auto;
+}
+</style>

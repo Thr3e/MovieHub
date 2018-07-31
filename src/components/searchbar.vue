@@ -34,11 +34,11 @@ export default {
 
 #search-bar{
     width: 100%;
-    background: olivedrab;
+    background: #dbe2ef;
 }
 
 .search-box{
-    height: 64px;
+    height: 40px;
 }
 
 .locat-wrap{
@@ -61,6 +61,6 @@ export default {
 }
 
 .title-box{
-    height: 50px;
+    height: 40px;
 }
 </style>

@@ -58,7 +58,7 @@ export default {
 <style scoped>
 .menu-wrap{
     width: 100%;
-    background: mediumpurple;
+    background: #3f72af;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -77,7 +77,7 @@ export default {
 }
 .menu-list a{
     display: block;
-    color: azure;
+    color: #f9f7f7;
     width: 100%;
     line-height: 20px;
     padding-top: 29px;
@@ -92,7 +92,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    background: orangered;
+    background: #112d4e;
     transition: left .5s linear
 }
 
@@ -103,7 +103,7 @@ export default {
     top: 4px;
     left: 50%;
     transform: translateX(-50%);
-    color:azure;
+    color:#f9f7f7;
     font-size: 25px;
 }
 </style>
