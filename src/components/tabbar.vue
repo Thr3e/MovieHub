@@ -5,8 +5,8 @@
                 <li v-for="(link, idx) in links" :key="idx" @click="curIdx = idx">
                     <router-link :to="link.href" exact>
                         {{link.title}}
+                        <Icon :type="iconType[idx]" class="iconfont"></Icon>
                     </router-link>
-                    <Icon :type="iconType[idx]" class="iconfont"></Icon>
                 </li>
             </ul>
             <div class="back-box" :style="{left : this.$store.state.left}"></div>
@@ -45,11 +45,16 @@ export default {
         },
         $route(to, from){
             let fullPath = to.fullPath;
-            if((to.fullPath).match('/detail')) {
+            if((to.fullPath).match('/detail') || (to.fullPath).match('/sign')) {
                 this.$store.commit('changeTbState', false)
             }else{
                 this.$store.commit('changeTbState', true)
             }
+        }
+    },
+    methods:{
+        a(){
+            console.log(10)
         }
     }
 }
@@ -79,6 +84,7 @@ export default {
     display: block;
     color: #f9f7f7;
     width: 100%;
+    height: 49px;
     line-height: 20px;
     padding-top: 29px;
     position: relative;

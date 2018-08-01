@@ -57,7 +57,6 @@ export default {
     margin: 10px auto;
     outline: 0;
     height: 22px;
-    /* float: left; */
 }
 
 .title-box{

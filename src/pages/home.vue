@@ -1,11 +1,11 @@
 <template>
     <div class="content">
         <Tabs>
-            <TabPane label="标签一">
+            <TabPane label="正在热映">
                 <Loader :isAnimation="isLoading"/>
-                <div class="movie-tag" v-for="(val, idx) in theaters" :key="idx">
+                <div class="movie-tag" v-for="(val, idx) in this.theaters" :key="idx">
                     <img :src="val['images']['small']" class="image"/>
-                    <div class="movie-info">
+                    <div class="movie-info small-font">
                         <h2 class="movie-title">{{val['original_title']}}</h2>
                         <div class="star-box">
                             <p v-if="val['rating']['average'] === 0">暂无评分</p>
@@ -14,16 +14,16 @@
                                 <span>{{val['rating']['average']}}</span>
                             </div>
                         </div>
-                        <p class="directors">导演:<span>{{getNameList(val['directors'])}}</span></p>
-                        <p class="casts">主演:<span>{{getNameList(val['casts'])}}</span></p>
+                        <p class="directors">导演:{{getNameList(val['directors'])}}</p>
+                        <p class="casts">主演:{{getNameList(val['casts'])}}</p>
                     </div>
                     <div class="btn-box">
-                        <p><span>{{getCollectCount(val['collect_count'])}}</span>人看过</p>
+                        <p>{{getCollectCount(val['collect_count'])}}人看过</p>
                         <button class="detail-btn" @click="goDetail" type="button" :data-id="val['id']">详情</button>
                     </div> 
                 </div>
             </TabPane>
-            <TabPane label="标签二">标签二的内容</TabPane>
+            <TabPane label="即将上映">标签二的内容</TabPane>
         </Tabs>
         
     </div>
@@ -105,7 +105,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    /* background: orangered; */
     text-align: left;
     border-bottom: 1px solid #ece9e9;
     padding: 10px 0;
@@ -118,10 +117,9 @@ export default {
 }
 
 .movie-tag p{
-    font-size: .6rem;
     overflow:hidden;
     text-overflow:ellipsis;
-    white-space:nowrap
+    white-space:nowrap; 
 }
 
 .movie-info{
@@ -132,7 +130,8 @@ export default {
 .movie-info .casts{
     height: 2.4rem;
     line-height: 1.2rem;
-    white-space:pre-wrap
+    white-space:pre-wrap;
+
 }
 
 .movie-info .movie-title{
@@ -169,5 +168,9 @@ export default {
 
 #loader{
     margin: 10px auto;
+}
+
+.ivu-tabs-bar {
+  background: #dbe2ef;
 }
 </style>

@@ -9,8 +9,8 @@
                 <h1 class="title">{{this.details['title']}}</h1>
                 <div class="time-info">
                     <p>{{getInfoStr([this.details['year'], this.details['countries'][0], this.details['tags'][0], this.details['tags'][1]])}}</p>
-                    <p>上映时间: <span>{{this.details['mainland_pubdate']}}</span>(中国大陆)</p>
-                    <p>片长:<span>{{this.details['durations'][0]}}</span></p>
+                    <p>上映时间: {{this.details['mainland_pubdate']}}(中国大陆)</p>
+                    <p>片长:{{this.details['durations'][0]}}</p>
                 </div>
                 <div class="rating-info">
                     <p>豆瓣评分</p> 
@@ -21,7 +21,7 @@
                             <Icon 
                             v-for="index in 5" :key="index" 
                             :type="getIconType(index)"></Icon>
-                            <p><span>{{this.details['ratings_count']}}</span>人</p>
+                            <p>{{this.details['ratings_count']}}人</p>
                         </div>
                     </div>
                 </div>
@@ -51,6 +51,31 @@
                         </swiper-slide>
                         <swiper-slide>更多</swiper-slide>
                     </swiper>
+                </div>
+                <div class="comment-box">
+                     <Tabs>
+                        <TabPane label="评论">
+                            <div v-for="item in this.details['popular_comments']" :key="item['author'].id">
+                                <img :src="item['author'].avatar">
+                                <span class="name">{{item['author'].name}}</span>
+                                <div class="star-wrap">
+                                    <Icon v-for="(val, index) in 5" :key="index + 1" :type="val > item['rating'].value ? 'ios-star-outline' : 'ios-star'"></Icon>
+                                </div>
+                                <p class="comment">{{item.content}}</p>
+                            </div>
+                        </TabPane>
+                        <TabPane label="影评">
+                            <div v-for="item in this.details['popular_reviews']" :key="item.id">
+                                <p class="title">{{item.title}}</p>
+                                <img :src="item['author'].avatar">
+                                <span class="name">{{item['author'].name}}</span>
+                                <div class="star-wrap">
+                                    <Icon v-for="(val, index) in 5" :key="index + 1" :type="val > item['rating'].value ? 'ios-star-outline' : 'ios-star'"></Icon>
+                                </div>
+                                <p class="comment">{{item.summary}}</p>
+                            </div>
+                        </TabPane>
+                    </Tabs>
                 </div>
             </div>
         </div>
@@ -119,6 +144,10 @@ export default {
 
 .title-wrap{
     text-align: left;
+}
+
+.worker-info img{
+    width: 100%;
 }
 
 </style>

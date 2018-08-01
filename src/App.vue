@@ -2,7 +2,7 @@
   <div id="app">
     <SearchBar/>
     <div class="router">
-      <transition name="slide">
+      <transition name="slide" mode="in-out">
         <router-view/>
       </transition>
     </div>
@@ -37,17 +37,30 @@ export default {
 
 .content{
   width: 100%;
-  padding: 10px 0 50px;
+  height: 100%;
+  padding-bottom:  50px;
+  background: #f9f7f7;;
   position: absolute;
   left: 0;
   top: 0;
 }
 
-.view-box-enter-active{
+.slide-enter-active{
   transition: transform .5s linear;
 }
 
-.view-box-enter{
+.slide-enter{
   transform: translate(-100%)
 }
+
+.ivu-tabs-nav{
+  width: calc(100% - 16px);
+  margin-left: 16px;
+  text-align: center
+}
+
+.ivu-tabs-nav .ivu-tabs-tab{
+  width: calc(50% - 16px);
+}
+
 </style>
