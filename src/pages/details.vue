@@ -13,17 +13,9 @@
                     <p>片长:{{this.details['durations'][0]}}</p>
                 </div>
                 <div class="rating-info">
-                    <p>豆瓣评分</p> 
-                    <div class="star-box">
-                        <p v-if="this.details['rating']['average'] === 0">暂无评分</p>
-                        <div v-else>
-                            <span>{{this.details['rating']['average']}}</span>
-                            <Icon 
-                            v-for="index in 5" :key="index" 
-                            :type="getIconType(index)"></Icon>
-                            <p>{{this.details['ratings_count']}}人</p>
-                        </div>
-                    </div>
+                    <p>豆瓣评分</p>
+                    <Starbox :rating="this.details['rating']"/>
+                    <p>{{this.details['ratings_count']}}人</p>
                 </div>
                 <div class="btn-box">
                     <Button type="warning" ghost>想看</Button>
@@ -84,6 +76,7 @@
 
 <script>
 import Loading from '../components/loading'
+import Starbox from '../components/starbox'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
@@ -102,7 +95,8 @@ export default {
     components:{
         Loading,
         swiper,
-        swiperSlide
+        swiperSlide,
+        Starbox
     },
     created(){
         this.$axios.get(this.HOST + '/movie/subject/' + this.$route.params.movieId, {
@@ -122,16 +116,6 @@ export default {
     methods:{
         getInfoStr(arr){
             return arr.join('/');
-        },
-        getIconType(idx){
-            let stars = this.details['rating']['stars'] / 10;
-            if (idx <= stars) {
-                return 'ios-star'
-            }else if (idx > stars && idx < stars + 1){
-                return 'ios-star-half'
-            }else if (idx >= stars + 1){
-                return 'ios-star-outline'
-            }
         },
     }
 }

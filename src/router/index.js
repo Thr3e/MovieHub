@@ -4,7 +4,7 @@ import Home from '../pages/home.vue';
 import Search from '../pages/search.vue';
 import Mine from '../pages/mine.vue';
 import Detail from '../pages/details.vue';
-import Sign from '../pages/sign.vue'
+import Sign from '../pages/sign.vue';
 
 Vue.use(Router)
 

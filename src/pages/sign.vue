@@ -1,86 +1,109 @@
 <template>
-    <div class="content">
-        <div class="title">
-            <h1 class="sign-title">欢迎来到放映厅</h1>
-        </div>
-        <form class="input-wrap">
-            <i-input placeholder="账号" @click.native="clearIpt" type="text" :clearable="true"></i-input>
-            <i-input placeholder="密码" @click.native="clearIpt" type="password" :clearable="true"></i-input>
-            <i-input placeholder="确认密码" @click.native="clearIpt" type="password" :clearable="true"></i-input>
-            <i-input placeholder="电话" @click.native="clearIpt" type="text" :clearable="true"></i-input>
-            <i-input placeholder="邮箱" @click.native="clearIpt" type="email" :clearable="true"></i-input>
-        </form>
-        <button type="button" class="singin-btn">注册</button>
-
-        <div class="linkinfo signup-link">
-            <router-link to="/signup">注册账号</router-link>
+    <div>
+        <h1 class="sign-title">{{title}}</h1>
+        <Signin v-if="isSignin" @getData="setData"/>
+        <Signup v-else @getData="setData"/>
+        <div class="pwdserve-btns">
+            <button type="button" @click="changePage">{{regTitle}}</button>
             <span>|</span>
-            <router-link to="/signup">忘记密码</router-link>
+            <button type="button">忘记密码</button>
         </div>
-        <div class="linkinfo other-link">
-            <router-link to="/signup">微博登录</router-link>
+        <div class="thirdsign-btns">
+            <button type="button">
+                微博登录
+            </button>
             <span>|</span>
-            <router-link to="/signup">微信登录</router-link>
+            <button type="button">
+                微信登录
+            </button>
         </div>
-        
     </div>
 </template>
 
 <script>
+import Signin from '../components/signin'
+import Signup from '../components/signup'
+
 export default {
-    name:'Sign',
+    name:"Sign",
     data(){
-        return{}
+        return{
+            isSignin:true,
+            title:'欢迎来到电影坞',
+            regTitle:"注册账号"
+        }
+    },
+    components:{
+        Signin,
+        Signup
     },
     methods:{
-        clearIpt(e){
-            if(e.target.nextElementSibling)
-                e.target.nextElementSibling.value = '';
+        changePage(e){
+            this.isSignin = !this.isSignin;
+            if (this.isSignin){
+                this.title = '欢迎来到电影坞';
+                this.regTitle = '注册账号'
+            }else {
+                this.title = '欢迎加入电影坞';
+                this.regTitle = '返回登录'
+            }
+        },
+        setData(data){
+            console.log(data);
         }
     }
 }
 </script>
 
 <style>
-.input-wrap{
+.sign-title{
+    margin: 80px auto 40px;
+
+}
+.input-box{
     width: 80%;
-    margin: 0 auto;
-    border: 1px solid #dcdee2;
+    margin: 10px auto;
+    border: 1px solid #112d4e77;
     border-radius: 5px;
     overflow: hidden;
+    border-bottom: 0;
 }
-.content .input-wrap .ivu-input{
-    border-radius: 0;
-    border: 0;
+.mint-cell-wrapper{
+    border-bottom: 1px solid #112d4e77;
 }
-
-.content .input-wrap .ivu-input{
-    border-bottom: 1px solid #dcdee2;
-}
-
-.singin-btn{
-    margin: 10px 0;
+.sign-btn{
     width: 80%;
-    line-height: 30px;
-    background: #333;
+    line-height: 40px;
+    background: #112d4e;
+    color: #f9f7f7;
+    letter-spacing: 5px;
     outline: 0;
     border: 0;
-    color: #f9f7f7;
     border-radius: 5px;
-    letter-spacing: 3px;
-    font-size: 14px;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
 }
 
-.signup-link a{
-    display: inline-block;
-    margin: 0 20px;
-    color: #dcdee2;
-
+.pwdserve-btns{
+    position: relative;
+    z-index: 3;
 }
 
-.other-link a {
+.thirdsign-btns{
+    width: 100%;
+    line-height: 50px;
+    font-size: 1.2rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    color: lightgray;
+}
+.thirdsign-btns button {
     display: inline-block;
-    margin: 0 20px;
-    color: #dcdee2;
+    color: gray;
+    margin: 0 30px;
+}
+.thirdsign-btns button:active{
+    color: darkgray;
 }
 </style>

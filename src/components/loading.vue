@@ -35,7 +35,7 @@ export default {
 #loader{
     width: 50px;
     height: 30px;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .loading-box{
