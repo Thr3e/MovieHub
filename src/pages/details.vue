@@ -5,17 +5,19 @@
             <div class="image">
                 <img :src="this.details['images']['medium']">
             </div>
-            <div class="title-wrap">
-                <h1 class="title">{{this.details['title']}}</h1>
-                <div class="time-info">
-                    <p>{{getInfoStr([this.details['year'], this.details['countries'][0], this.details['tags'][0], this.details['tags'][1]])}}</p>
-                    <p>上映时间: {{this.details['mainland_pubdate']}}(中国大陆)</p>
-                    <p>片长:{{this.details['durations'][0]}}</p>
-                </div>
-                <div class="rating-info">
-                    <p>豆瓣评分</p>
-                    <Starbox :rating="this.details['rating']"/>
-                    <p>{{this.details['ratings_count']}}人</p>
+            <div class="movie-info">
+                <div class="title-wrap">
+                    <h1 class="title">{{this.details['title']}}</h1>
+                    <div class="time-info">
+                        <p>{{getInfoStr([this.details['year'], this.details['countries'][0], this.details['tags'][0], this.details['tags'][1]])}}</p>
+                        <p>上映时间: {{this.details['mainland_pubdate']}}(中国大陆)</p>
+                        <p>片长:{{this.details['durations'][0]}}</p>
+                    </div>
+                    <div class="rating-info">
+                        <p>豆瓣评分</p>
+                        <Starbox :rating="this.details['rating']"/>
+                        <p>{{this.details['ratings_count']}}人</p>
+                    </div>
                 </div>
                 <div class="btn-box">
                     <Button type="warning" ghost>想看</Button>
@@ -28,47 +30,46 @@
                     <p>剧情简介</p>
                     <p class="summary">{{this.details['summary']}}</p>
                 </div>
-                <div class="worker-info">
-                    <p class="title">影人</p>
-                    <swiper :options="swiperOption">
-                        <swiper-slide v-for="(item, index) in this.details['directors']" :key="index + 1">
-                            <img :src="item['avatars']['small']" alt="">
-                            <p>{{item['name']}}</p>
-                            <span>导演</span>
-                        </swiper-slide>
-                        <swiper-slide v-for="(item, index) in this.details['casts']" :key="index + 100">
-                            <img :src="item['avatars']['small']" alt="">
-                            <p>{{item['name']}}</p>
-                            <span>演员</span>
-                        </swiper-slide>
-                        <swiper-slide>更多</swiper-slide>
-                    </swiper>
-                </div>
-                <div class="comment-box">
-                     <Tabs>
-                        <TabPane label="评论">
-                            <div v-for="item in this.details['popular_comments']" :key="item['author'].id">
-                                <img :src="item['author'].avatar">
-                                <span class="name">{{item['author'].name}}</span>
-                                <div class="star-wrap">
-                                    <Icon v-for="(val, index) in 5" :key="index + 1" :type="val > item['rating'].value ? 'ios-star-outline' : 'ios-star'"></Icon>
-                                </div>
-                                <p class="comment">{{item.content}}</p>
+            </div>
+            <div class="worker-info">
+                <p class="title">影人</p>
+                <swiper :options="swiperOption">
+                    <swiper-slide v-for="(item, index) in this.details['directors']" :key="index + 1">
+                        <img class="person-pic" :src="item['avatars']['small']" alt="">
+                        <p>{{item['name']}}</p>
+                        <span>导演</span>
+                    </swiper-slide>
+                    <swiper-slide v-for="(item, index) in this.details['casts']" :key="index + 100">
+                        <img class="person-pic" :src="item['avatars']['small']" alt="">
+                        <p>{{item['name']}}</p>
+                        <span>演员</span>
+                    </swiper-slide>
+                </swiper>
+            </div>
+            <div class="comment-box">
+                <Tabs>
+                    <TabPane label="评论">
+                        <div v-for="item in this.details['popular_comments']" :key="item['author'].id">
+                            <img :src="item['author'].avatar">
+                            <span class="name">{{item['author'].name}}</span>
+                            <div class="star-wrap">
+                                <Icon v-for="(val, index) in 5" :key="index + 1" :type="val > item['rating'].value ? 'ios-star-outline' : 'ios-star'"></Icon>
                             </div>
-                        </TabPane>
-                        <TabPane label="影评">
-                            <div v-for="item in this.details['popular_reviews']" :key="item.id">
-                                <p class="title">{{item.title}}</p>
-                                <img :src="item['author'].avatar">
-                                <span class="name">{{item['author'].name}}</span>
-                                <div class="star-wrap">
-                                    <Icon v-for="(val, index) in 5" :key="index + 1" :type="val > item['rating'].value ? 'ios-star-outline' : 'ios-star'"></Icon>
-                                </div>
-                                <p class="comment">{{item.summary}}</p>
+                            <p class="comment">{{item.content}}</p>
+                        </div>
+                    </TabPane>
+                    <TabPane label="影评">
+                        <div v-for="item in this.details['popular_reviews']" :key="item.id">
+                            <p class="title">{{item.title}}</p>
+                            <img :src="item['author'].avatar">
+                            <span class="name">{{item['author'].name}}</span>
+                            <div class="star-wrap">
+                                <Icon v-for="(val, index) in 5" :key="index + 1" :type="val > item['rating'].value ? 'ios-star-outline' : 'ios-star'"></Icon>
                             </div>
-                        </TabPane>
-                    </Tabs>
-                </div>
+                            <p class="comment">{{item.summary}}</p>
+                        </div>
+                    </TabPane>
+                </Tabs>
             </div>
         </div>
     </div>
@@ -122,16 +123,53 @@ export default {
 </script>
 
 <style scoped>
-.content{
+.movie-info{
     padding: 10px 20px 50px;
 }
-
 .title-wrap{
     text-align: left;
+    position: relative;
 }
 
-.worker-info img{
-    width: 100%;
+.rating-info{
+    width: 100px;
+    background: #ffffff;
+    border: 1px solid #dbe2ef;
+    text-align: center;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 7px 7px 4px #999
 }
+
+.person-pic{
+    display: block;
+    width: 70px;
+    height: 100px;
+    background: url('../assets/person_back.png') no-repeat center center;
+    border: 1px solid #dbe2ef;
+}
+
+.image{
+    width: 100%;
+    position: relative;
+}
+
+.image::before{
+    content: "";
+    padding-top: 100%;
+    display: block;
+    background: #dbe2ef;
+}
+
+.image img{
+    width: 56%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 </style>

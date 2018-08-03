@@ -102,8 +102,17 @@ export default {
     display: inline-block;
     color: gray;
     margin: 0 30px;
+    background: #f9f7f7;
+    outline: 0;
+    border: 0;
 }
 .thirdsign-btns button:active{
     color: darkgray;
+}
+
+.pwdserve-btns button{
+    background: #f9f7f7;
+    outline: 0;
+    border: 0;
 }
 </style>

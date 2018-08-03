@@ -23,12 +23,12 @@ export default {
             left:0,
             links:[
                 {title:'主页', href:'/'},
-                {title:'搜索', href:'/search'},
+                {title:'排行榜', href:'/search'},
                 {title:'我的', href:'/mine'}
             ],
             routePath : {
                 '/':'主页',
-                '/search':'搜索',
+                '/search':'排行榜',
                 '/mine':'我的',
                 '/detail':'详情'
             },

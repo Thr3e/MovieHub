@@ -29,7 +29,7 @@ export default {
 }
 .router{
   width: 100%;
-  height: calc(100% - 64px);
+  height: calc(100% - 40px);
   overflow: scroll;
   position: relative;
   z-index: 10;
@@ -37,8 +37,8 @@ export default {
 
 .content{
   width: 100%;
-  height: 100%;
-  padding-bottom:  50px;
+  /* height: 100%; */
+  padding-bottom: 50px;
   background: #f9f7f7;;
   position: absolute;
   left: 0;
@@ -51,16 +51,6 @@ export default {
 
 .slide-enter{
   transform: translate(-100%)
-}
-
-.ivu-tabs-nav{
-  width: calc(100% - 16px);
-  margin-left: 16px;
-  text-align: center
-}
-
-.ivu-tabs-nav .ivu-tabs-tab{
-  width: calc(50% - 16px);
 }
 
 </style>

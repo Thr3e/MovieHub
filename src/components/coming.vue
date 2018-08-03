@@ -60,7 +60,6 @@ export default {
                 }
             })
             .then(res => {
-                console.log(res['data']['subjects'])
                 this.theaters = res['data']['subjects'];
                 this.isLoading = false;
                 success && success();

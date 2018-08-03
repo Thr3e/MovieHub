@@ -60,7 +60,6 @@ export default {
                 }
             })
             .then(res => {
-                console.log(res['data']['subjects'])
                 this.theaters = res['data']['subjects'];
                 this.isLoading = false;
                 success && success();
@@ -174,9 +173,5 @@ export default {
 
 #loader{
     margin: 10px auto;
-}
-
-.ivu-tabs-bar {
-  background: #dbe2ef;
 }
 </style>

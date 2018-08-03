@@ -1,8 +1,8 @@
 <template>
     <div class="content">
         <div class="new-movie">
-            <h3>火热大片</h3>
-            <NewMovie/>
+            <h1>火热大片</h1>
+            <NewMovie class="newmovie"/>
         </div>
         <div class="ranking-list">
             <mt-swipe :show-indicators="false" :auto="0">
@@ -33,12 +33,47 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .ranking-list{
     height: 340px;
 }
 .new-movie{
-    height: 300px;
+    height: 336px;
+    margin: 30px auto;
+}
+.new-movie h1{
+    text-align: left;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.ranking-list .mint-cell-text{
+    display: inline-block;
+    width: 80%;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.ranking-list .sub-wrap{
+    width: 100px;
+}
+
+.ranking-list .star-box{
+    font-size: 12px;
+    color: orange
+}
+
+.ranking-list .sub-wrap button{
+    outline: 0;
+    font-size: 12px;
+    background: #fff;
+    padding: 3px 8px;
+    border: 1px solid #de5b7b;
+    color: #de5b7b;
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
 </style>

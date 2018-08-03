@@ -37,7 +37,6 @@ export default {
         .then(res => {
             this.data = res['data'];
             this.movieInfo = this.data['subjects']
-            console.log(this.movieInfo)
         })
         .catch(error => {
             console.log(error);

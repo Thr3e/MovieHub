@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content home">
         <Tabs>
             <TabPane label="正在热映">
                 <Loader v-if="!getTheartSuccess" :isAnimation="!getTheartSuccess"/>
@@ -31,14 +31,6 @@ export default {
         Intheaters,
         Coming
     },
-    watch:{
-        getTheartSuccess(newVal){
-            console.log(newVal);
-        },
-        getComingSuccess(newVal){
-            console.log(newVal + 'c')
-        }
-    },
     methods:{
         hasTheartData(data){
             this.getTheartSuccess = data;
@@ -51,8 +43,28 @@ export default {
 </script>
 
 <style>
-.ivu-tabs-bar{
+.home .ivu-tabs{
+    padding-top: 24px;
+}
+
+.home .ivu-tabs-bar{
+    width: 100%;
     margin-bottom: 0;
+    position: fixed;   
+    top: 36px;
+    left: 0;
+    z-index: 10;
+    background: #dbe2ef;
+}
+
+.home .ivu-tabs-nav{
+  width: calc(100% - 16px);
+  margin-left: 16px;
+  text-align: center
+}
+
+.home .ivu-tabs-nav .ivu-tabs-tab{
+  width: calc(50% - 16px);
 }
 
 </style>

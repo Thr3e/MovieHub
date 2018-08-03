@@ -36,8 +36,7 @@ export default {
         })
         .then(res => {
             this.data = res['data'];
-            this.movieInfo = this.data['subjects']
-            console.log(this.movieInfo)
+            this.movieInfo = this.data['subjects'];
         })
         .catch(error => {
             console.log(error);
